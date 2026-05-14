@@ -113,7 +113,7 @@ class Admin {
 	 *
 	 * @since 4.7.0
 	 */
-	public function register_menu() {
+	public function register_menu(): void { // phpcs:ignore WPForms.PHP.HooksMethod.InvalidPlaceForAddingHooks
 
 		if ( Multisite::is_network_activated() ) {
 			$hook = add_submenu_page(
@@ -142,7 +142,7 @@ class Admin {
 	 *
 	 * @since 4.8.0
 	 */
-	public function enqueue_admin_styles() {
+	public function enqueue_admin_styles(): void {
 
 		wp_enqueue_script(
 			'pdfemb_admin',
@@ -164,6 +164,7 @@ class Admin {
 					'deactivate'       => esc_html__( 'Deactivate', 'pdf-embedder' ),
 					'deactivate_nonce' => wp_create_nonce( 'pdfemb-deactivate-partner' ),
 					'deactivating'     => esc_html__( 'Deactivating...', 'pdf-embedder' ),
+					'getstarted_nonce' => wp_create_nonce( 'pdfemb-getstarted' ),
 					'inactive'         => esc_html__( 'Status: Inactive', 'pdf-embedder' ),
 					'install'          => esc_html__( 'Install', 'pdf-embedder' ),
 					'install_nonce'    => wp_create_nonce( 'pdfemb-install-partner' ),
@@ -183,7 +184,7 @@ class Admin {
 	}
 
 	/**
-     * Register sections used in plugin admin area.
+     * Register sections used in the plugin admin area.
 	 *
 	 * @since 4.7.0
 	 *
@@ -653,6 +654,7 @@ class Admin {
 
 		if (
 			! isset( $_POST[ Options::KEY ] ) ||
+			! isset( $_POST['section'] ) ||
 			! is_array( $_POST[ Options::KEY ] )
 		) {
 			/*
@@ -673,8 +675,11 @@ class Admin {
 			exit;
 		}
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.InputNotValidated
-		pdf_embedder()->options()->save( wp_unslash( $_POST[ Options::KEY ] ), sanitize_key( $_POST['section'] ) );
+		pdf_embedder()->options()->save(
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+			wp_unslash( $_POST[ Options::KEY ] ),
+			sanitize_key( $_POST['section'] )
+		);
 
 		$error_code    = [];
 		$error_setting = [];

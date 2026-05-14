@@ -3,6 +3,7 @@
 namespace PDFEmbedder\Shortcodes;
 
 use PDFEmbedder\Options;
+use PDFEmbedder\Helpers\Check;
 use PDFEmbedder\Viewer\Viewer;
 use PDFEmbedder\Viewer\ViewerInterface;
 
@@ -39,6 +40,22 @@ class PdfEmbedder {
 		}
 
 		/**
+		 * `/securepdfs/` URLs persist in the post content even after a Pro downgrade or full premium uninstall.
+		 *
+		 * Filter whether the current install can render PDFs stored under `/wp-content/uploads/securepdfs/`.
+		 * Covers shortcode, block, and Elementor widget render paths — they all converge here.
+		 *
+		 * @since 5.0.0
+		 *
+		 * @param bool $can_render Whether secure-folder PDFs can be rendered.
+		 */
+		$can_render_secure_pdfs = (bool) apply_filters( 'pdfemb_can_render_secure_pdfs', false );
+
+		if ( ! $can_render_secure_pdfs && Check::is_secure_pdf_url( $a['url'] ) ) {
+			return '<!-- PDF Embedder: Embedding /securepdfs/ PDFs requires PDF Embedder Pro. -->';
+		}
+
+		/**
 		 * Filter the viewer instance for the shortcode.
 		 *
 		 * @since 4.8.0
@@ -67,34 +84,40 @@ class PdfEmbedder {
 	 * We also deal with options having a prefix "pdfemb_" vs attributes not having it.
 	 *
 	 * @since 4.8.0
+	 * @since 5.0.0 Inline option atts run through the per-key validators under the
+	 *                  `render` saving context instead of passing through unchanged.
 	 *
 	 * @param array $user_atts Shortcode attributes.
 	 */
 	protected function get_processed_atts( array $user_atts ): array {
 
 		$prefixed_atts = Options::prefix( $user_atts );
+		$options       = pdf_embedder()->options();
 
-		// Get the user-defined non-options attributes from the shortcode attributes.
-		$non_options = array_diff_key( $prefixed_atts, pdf_embedder()->options()->get_defaults() );
+		// Inline-only keys (e.g. `url`, `page`, `zoom`, `pdfID`) aren't part of the
+		// options array, so validators don't see them. Carry them through raw — output
+		// sinks in the viewer do their own escaping/casting.
+		$non_options = array_diff_key( $prefixed_atts, $options->get_defaults() );
 
-		// Validate the values of attributes that are options.
-		$bloated_validated_all = Options::validate( $prefixed_atts );
+		// Validate inline option atts under the `render` saving context. Free + each
+		// plan's `validate_options` returns only the keys present in `$prefixed_atts`,
+		// with values normalized by the same per-key rules used on admin save. Keys the
+		// user did not pass inline are absent from the result so they fall through to
+		// the merged defaults+DB layer in `Viewer::set_options()` and aren't overridden
+		// by hard-coded defaults.
+		$prev_context = $options->saving_context;
 
-		// Merge the user-defined non-options attributes with the validated options.
-		$bloated_validated_with_users = array_merge(
-			$bloated_validated_all,
-			$non_options
-		);
+		$options->saving_context = 'render';
 
-		$prefixed_validated = [];
-
-		// Now combine the validated options with the user-defined non-options attributes
-		// without keys that are present in the options but not in attributes.
-		foreach ( $prefixed_atts as $key => $value ) {
-			if ( array_key_exists( $key, $bloated_validated_with_users ) ) {
-				$prefixed_validated[ $key ] = $value;
-			}
+		try {
+			$validated_options = Options::validate( $prefixed_atts );
+		} finally {
+			$options->saving_context = $prev_context;
 		}
+
+		// Validated option keys + non-option keys. They don't overlap because
+		// `$non_options` is the diff against the defaults that drive validation.
+		$prefixed_validated = $validated_options + $non_options;
 
 		$validated = Options::unprefix( $prefixed_validated );
 

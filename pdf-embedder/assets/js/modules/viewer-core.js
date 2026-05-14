@@ -277,7 +277,7 @@ jQuery( document ).ready( function( $ ) {
 	};
 
 	pdfembPagesViewer.prototype.setSizesBasedOnPage = function( page ) {
-		var vp = page.getViewport( 1.0 ); // scale = 1.0
+		var vp = page.getViewport( { scale: 1.0 } );
 
 		this.pageWidth = vp.width;
 		this.pageHeight = vp.height;
@@ -698,7 +698,7 @@ jQuery( document ).ready( function( $ ) {
 
 			if ( ! widthfactor || ! heightfactor ) {
 				// calculate factors
-				var vp = page.getViewport( 1.0 ); // scale = 1.0
+				var vp = page.getViewport( { scale: 1.0 } );
 
 				widthfactor = vp.width / self.pageWidth;
 				heightfactor = vp.height / self.pageHeight;
@@ -742,7 +742,7 @@ jQuery( document ).ready( function( $ ) {
 			}
 
 			// Render PDF page into canvas context
-			var viewport = page.getViewport( canvasscale * zoom / 100 );
+			var viewport = page.getViewport( { scale: canvasscale * zoom / 100 } );
 
 			// if ( typeof offscreenCanvas !== 'undefined' ) {
 			//     releaseCanvas( offscreenCanvas );
