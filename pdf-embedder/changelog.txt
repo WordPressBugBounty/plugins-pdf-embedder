@@ -1,3 +1,7 @@
+= 5.0.1 =
+* Fixed: Occasional fatal errors that could be triggered during WordPress cron runs when other plugins (such as SEO indexers) parsed post content containing PDF Embedder.
+* Fixed: A "source width is 0" JavaScript error that broke the PDF Viewer in hidden containers or when caching plugins served stale assets after 5.0.0.
+
 = 5.0.0 =
 * IMPORTANT: The minimum WordPress version has been raised to WordPress 6.6.
 * IMPORTANT: The minimum PHP version has been raised to PHP 7.4.

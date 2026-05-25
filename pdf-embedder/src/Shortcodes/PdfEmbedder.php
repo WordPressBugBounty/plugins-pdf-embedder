@@ -33,6 +33,13 @@ class PdfEmbedder {
 	 */
 	public function render( array $user_atts, string $content = '' ): string {
 
+		// Premium skips `load_viewer()` on cron/heartbeat, so `pdfemb_shortcode_viewer`
+		// below would return a null viewer → TypeError. Shortcode and block registration
+		// are already guarded against cron, but `render()` is also reachable directly.
+		if ( wp_doing_cron() || Check::is_heartbeat() ) {
+			return '';
+		}
+
 		$a = $this->get_processed_atts( $user_atts );
 
 		if ( empty( $a['url'] ) || empty( esc_url( set_url_scheme( $a['url'] ) ) ) ) {

@@ -731,6 +731,15 @@ jQuery( document ).ready( function( $ ) {
 				canvasscale = self.canvasscale,
 				zoom = self.zoom;
 
+			// Container is not measurable yet (e.g. embed inside a hidden tab/
+			// accordion/modal) — `getImageData` further down throws IndexSizeError
+			// on a 0-width canvas. Clear the pending-drawing-round so a later
+			// renderPage call (once the container becomes visible) can proceed.
+			if ( ! wantCanvasWidth || ! wantCanvasHeight || ! widthfactor || ! heightfactor ) {
+				innerdiv.data( 'pending-drawing-round', '' );
+				return;
+			}
+
 			canvas.css( 'width', wantCanvasWidth * widthfactor );
 			canvas.css( 'height', wantCanvasHeight * heightfactor );
 

@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PDF Embedder 5.0.0\n"
+"Project-Id-Version: PDF Embedder 5.0.1\n"
 "Report-Msgid-Bugs-To: https://wp-pdf.com/contact/\n"
 "Last-Translator: WP PDF <support@wp-pdf.com>\n"
 "Language-Team: WP PDF <support@wp-pdf.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-13T19:15:20+00:00\n"
+"POT-Creation-Date: 2026-05-25T13:28:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: pdf-embedder\n"
@@ -343,59 +343,59 @@ msgstr ""
 msgid "Yup, we know a thing or two about building awesome products that customers love."
 msgstr ""
 
-#: src/Admin/Pages/GetPro.php:14
+#: src/Admin/Pages/GetPro.php:19
 msgid "Get Pro"
 msgstr ""
 
-#: src/Admin/Pages/GetPro.php:20
+#: src/Admin/Pages/GetPro.php:25
 msgid "Unlock the Full Power of PDF Embedder Pro!"
 msgstr ""
 
-#: src/Admin/Pages/GetPro.php:23
+#: src/Admin/Pages/GetPro.php:28
 msgid "You've experienced the basics, now take your WordPress PDF integration to the next level. As a valued PDF Embedder user, you're just one step away from accessing a suite of advanced features that will transform your site's document presentation."
 msgstr ""
 
-#: src/Admin/Pages/GetPro.php:29
-msgid "We know that you'll truly love PDF Embedder. <strong>It has over 300+ five-star ratings (⭐⭐⭐⭐⭐) and is active on over 300,000 websites!"
-msgstr ""
-
-#: src/Admin/Pages/GetPro.php:39
-msgid "Why upgrade to Pro?"
-msgstr ""
-
-#: src/Admin/Pages/GetPro.php:43
-msgid "Mobile-Ready"
+#: src/Admin/Pages/GetPro.php:34
+msgid "We know that you'll truly love PDF Embedder. <strong>It has over 400+ five-star ratings (⭐⭐⭐⭐⭐) and is active on over 300,000 websites!"
 msgstr ""
 
 #: src/Admin/Pages/GetPro.php:44
-msgid "Track PDF Views & Downloads"
+msgid "Why upgrade to Pro?"
 msgstr ""
 
-#: src/Admin/Pages/GetPro.php:45
-msgid "Jump to any Page"
-msgstr ""
-
-#: src/Admin/Pages/GetPro.php:46
-msgid "Continuous Scroll Navigation"
+#: src/Admin/Pages/GetPro.php:48
+msgid "Mobile-Ready"
 msgstr ""
 
 #: src/Admin/Pages/GetPro.php:49
-msgid "Enhanced PDF Security"
+msgid "Track PDF Views & Downloads"
 msgstr ""
 
 #: src/Admin/Pages/GetPro.php:50
-msgid "Custom Watermarks"
+msgid "Jump to any Page"
 msgstr ""
 
 #: src/Admin/Pages/GetPro.php:51
+msgid "Continuous Scroll Navigation"
+msgstr ""
+
+#: src/Admin/Pages/GetPro.php:54
+msgid "Enhanced PDF Security"
+msgstr ""
+
+#: src/Admin/Pages/GetPro.php:55
+msgid "Custom Watermarks"
+msgstr ""
+
+#: src/Admin/Pages/GetPro.php:56
 msgid "Download Button Controls"
 msgstr ""
 
-#: src/Admin/Pages/GetPro.php:52
+#: src/Admin/Pages/GetPro.php:57
 msgid "Priority Support"
 msgstr ""
 
-#: src/Admin/Pages/GetPro.php:58
+#: src/Admin/Pages/GetPro.php:63
 #: src/Admin/Pages/Mobile.php:109
 #: src/Admin/Pages/Secure.php:135
 #: src/Admin/Pages/Watermarks.php:155
@@ -534,23 +534,23 @@ msgstr ""
 msgid "Unsupported plugin."
 msgstr ""
 
-#: src/Admin/WPorgReview.php:96
+#: src/Admin/WPorgReview.php:106
 msgid "Hey, it looks like you are using <strong>PDF Embedder</strong> for quite a while, which is great! Can you please give it a 5-star rating on WordPress.org to help us spread the word and stay motivated? Thanks!"
 msgstr ""
 
-#: src/Admin/WPorgReview.php:104
+#: src/Admin/WPorgReview.php:114
 msgid "Ok, you deserve it"
 msgstr ""
 
-#: src/Admin/WPorgReview.php:105
+#: src/Admin/WPorgReview.php:115
 msgid "Dismiss for one month"
 msgstr ""
 
-#: src/Admin/WPorgReview.php:105
+#: src/Admin/WPorgReview.php:115
 msgid "Nope, maybe later"
 msgstr ""
 
-#: src/Admin/WPorgReview.php:106
+#: src/Admin/WPorgReview.php:116
 msgid "I already did"
 msgstr ""
 

@@ -361,7 +361,7 @@ class Admin {
 				</p>
 				<p class="links">
 					<?php
-					$support_url = pdf_embedder()->is_premium() ? Links::get_utm_link( 'https://wp-pdf.com/contact/', 'Admin - Footer', 'Support' ) : 'https://wordpress.org/support/plugin/pdf-embedder/';
+					$support_url = pdf_embedder()->is_premium() ? Links::get_utm_link( 'https://wp-pdf.com/account/support/', 'Admin - Footer', 'Support' ) : 'https://wordpress.org/support/plugin/pdf-embedder/';
 					?>
 					<a href="<?php echo esc_url( $support_url ); ?>" target="_blank"><?php esc_html_e( 'Support', 'pdf-embedder' ); ?></a>
 					<span>/</span>
@@ -444,7 +444,7 @@ class Admin {
 			return $text;
 		}
 
-		$url  = 'https://wordpress.org/support/plugin/pdf-embedder/reviews/?filter=5#new-post';
+		$url  = WPorgReview::REVIEW_URL;
 		$text = sprintf(
 			wp_kses( /* translators: $1$s - PDF Embedder plugin name, $2$s - WP.org review link, $3$s - WP.org review link. */
 				__( 'Please rate %1$s <a href="%2$s" target="_blank" rel="noopener noreferrer">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%3$s" target="_blank">WordPress.org</a> to help us spread the word.', 'pdf-embedder' ),
