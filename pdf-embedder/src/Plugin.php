@@ -146,7 +146,7 @@ final class Plugin {
 			'pdfemb_pdfjs',
 			Assets::url( 'js/pdfjs/pdf.js' ),
 			[ 'jquery' ],
-			'2.16.105',
+			Assets::PDFJS_VERSION,
 			false
 		);
 
@@ -159,7 +159,9 @@ final class Plugin {
 		);
 
 		$front = [
-			'worker_src' => Assets::url( 'js/pdfjs/pdf.worker.js' ),
+			// The worker is not an enqueued script, so WordPress adds no `?ver=` on its own.
+			'worker_src' => add_query_arg( 'ver', Assets::PDFJS_VERSION, Assets::url( 'js/pdfjs/pdf.worker.js' ) ),
+			// PDF.js appends `<name>.bcmap` to this string, so it cannot carry a `?ver=` query.
 			'cmap_url'   => PDFEMB_PLUGIN_URL . 'assets/js/pdfjs/cmaps/',
 			'objectL10n' => [
 				'loading'            => esc_html__( 'Loading...', 'pdf-embedder' ),

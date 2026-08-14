@@ -125,7 +125,7 @@ class GetStarted {
 									]
 								),
 								pdf_embedder()->is_premium()
-									? esc_url( Links::get_utm_link( 'https://wp-pdf.com/docs/premium-instructions-attributes/', 'Admin - GetStarted', 'Shortcode' ) )
+									? esc_url( Links::get_utm_link( 'https://wp-pdf.com/docs/using-the-pdf-embedder-shortcode/', 'Admin - GetStarted', 'Shortcode' ) )
 									: esc_url( Links::get_utm_link( 'https://wp-pdf.com/docs/free-instructions/', 'Admin - GetStarted', 'Shortcode' ) )
 							);
 							?>

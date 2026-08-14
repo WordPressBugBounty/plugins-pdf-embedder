@@ -1,3 +1,7 @@
+= 5.0.2 =
+* Changed: Compatibility with WordPress 7.1.
+* Fixed: The PDF Viewer could get stuck on "Loading..." after a plugin update until browser and CDN caches were cleared.
+
 = 5.0.1 =
 * Fixed: Occasional fatal errors that could be triggered during WordPress cron runs when other plugins (such as SEO indexers) parsed post content containing PDF Embedder.
 * Fixed: A "source width is 0" JavaScript error that broke the PDF Viewer in hidden containers or when caching plugins served stale assets after 5.0.0.

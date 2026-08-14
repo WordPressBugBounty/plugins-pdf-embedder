@@ -42,6 +42,12 @@ class Admin {
 		( new Education\DemoContent() )->hooks();
 		( new Education\GetStarted() )->hooks();
 
+		// Skipped when Elementor isn't active so the class, which typehints
+		// Elementor internals, isn't autoloaded on sites without it.
+		if ( did_action( 'elementor/loaded' ) ) {
+			( new Education\Elementor() )->hooks();
+		}
+
 		// Styles used inside Media library screens.
 		if ( $pagenow === 'upload.php' ) {
 			wp_enqueue_style(
